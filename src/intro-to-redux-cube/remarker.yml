@@ -1,0 +1,23 @@
+port: 6275
+dest: ../../build/intro-to-redux-cube
+source: slides.md
+assets:
+  - assets
+  - diagrams
+title: Introduction to Redux Cube
+cssFiles:
+  - ../../shared/styles/index.css
+# scriptFiles:
+#   - node_modules/mermaid/dist/mermaid.min.js
+#   - scripts/index.js
+# script: runMermaid();
+remarkPath: ../../shared/vendor/remark.min.js
+remarkConfig:
+  ratio: '4:3'
+  navigation:
+    scroll: false
+    touch: true
+    click: false
+  highlightStyle: atom-one-light
+  highlightLines: true
+  highlightSpans: true

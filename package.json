@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "Slides",
+  "version": "1.0.0",
+  "author": "dexter.yy@gmail.com",
+  "license": "ISC",
+  "scripts": {
+    "update": "npm run clear:deps && yarn install && lerna run prepare",
+    "upgrade": "npm run clear:lock && npm run update",
+    "clear:lock": "rm yarn.lock package-lock.json 2>/dev/null || true",
+    "clear:deps":
+      "lerna clean --yes 2>/dev/null || true && rm -rf ./node_modules 2>/dev/null || true && lerna exec --bail=false -- rm yarn.lock package-lock.json 2>/dev/null || true",
+    "clear:build": "rm -rf build 2>/dev/null || true",
+    "build": "npm run clear:build && lerna exec --bail=false -- npm run build"
+  },
+  "workspaces": ["src/*"],
+  "dependencies": {},
+  "devDependencies": {}
+}

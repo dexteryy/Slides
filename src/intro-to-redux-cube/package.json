@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "intro-to-redux-cube",
+  "version": "1.0.0",
+  "author": "dexter.yy@gmail.com",
+  "license": "ISC",
+  "scripts": {
+    "dev": "npm run build:mermaid && remarker",
+    "build": "npm run build:mermaid && remarker build",
+    "build:mermaid":
+      "rm diagrams/*.png diagrams/*.svg 2>/dev/null || true && ls diagrams/*.mmd | xargs -I {input} mmdc -t neutral -w 1920 -i {input} -o {input}.png"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mermaid.cli": "^0.3.1",
+    "remarker": "^1.6.2"
+  }
+}

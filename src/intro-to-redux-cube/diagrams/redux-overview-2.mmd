@@ -1,0 +1,49 @@
+graph TB
+
+  subgraph Actions
+    actionCreators[Action Creators]-->actions[Actions]
+    actions-->middlewares[Action Middlewares]
+    actionTypes[Action Types]-->actionCreators
+  end
+
+  middlewares-->store
+
+  store--"(state, action)"-->rootReducer[Root Reducer]
+
+  subgraph Reducers
+    rootReducer--"(sliceOfState, action)"-->reducers["Slice Reducers"]
+    reducers--"(sliceOfState, action)"-->switch["Switch Statement / Action Handler"]
+    actionTypes[Action Types]-->switch
+    switch--"New State"-->reducers
+    reducers--"New State"-->rootReducer
+  end
+
+  rootReducer--"New State"-->store
+
+  subgraph Components
+    containers["Container Components"]--"props.actions"-->actionCallback["Action Callbacks"]
+    actionCallback--"store.dispatch()"-->actionCreators
+    containers--"New props"-->components["Dumb Components"]
+    components--"callback"-->containers
+  end
+
+  connect["connect()"]--store.subscribe-->store
+  connect--store.getState-->store
+  store--"New State"-->connect
+
+  subgraph Connect
+    connect["connect()"]-->mapDispatchToProps
+    mapDispatchToProps--"props.actions"-->containers
+
+    connect--"New State"-->mapStateToProps
+    mapStateToProps--"New State"-->selector[Memoized Selector]
+    selector--"New State"-->inputSelector[Input Selectors]
+    inputSelector--"Selected Values"-->selector
+    selector--"Memoized Values"-->mapStateToProps
+    selector--"Selected Values"-->transform["Transform Function"]
+    transform--"Computed Values"-->selector
+    selector--"New Values"-->mapStateToProps
+    mapStateToProps--"New props"-->containers
+  end
+
+
